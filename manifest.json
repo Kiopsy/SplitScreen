@@ -1,0 +1,31 @@
+{
+    "manifest_version": 3,
+  
+    "name": "SplitScreen - Window manager",
+    "description": "CS279r Window Manager.",
+    "version": "1.5.8",
+    "short_name" : "SplitUp!",
+  
+    "action": {
+      "default_icon": "SplitLogo.png",
+      "default_popup": "popup.html",
+      "default_title": "SplitUp!"
+    },
+    "icons":
+    {
+       "128": "SplitLogo.png"
+    },
+
+    "permissions": [
+      "tabs",
+      "storage"
+    ],
+    "commands": {
+      "_execute_browser_action": {
+        "description": "Activate extension"
+      },
+      "split-up": {
+        "description": "Split to separate window!"
+      }
+    }
+  }

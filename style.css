@@ -1,0 +1,34 @@
+body {
+  overflow-x:hidden;
+  width : 180px;
+  height : 370px;
+  padding-top : 10px;
+  padding-left : 5px;
+  padding-right: 5px;
+}
+
+td {
+  padding: 2px;
+}
+
+.screen_size {
+  fill: white;
+  stroke-width:2;
+  stroke:#77a6f7;
+}
+
+.screen_size:hover {
+  fill: #303C6C;
+  stroke-width:2;
+  stroke:#77a6f7;
+}
+
+.number_label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-right: 1px solid #DDD;
+  margin-right: 5px;
+  width: 2em;
+  height: 43px;
+}
