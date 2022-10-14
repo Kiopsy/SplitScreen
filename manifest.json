@@ -18,7 +18,8 @@
 
     "permissions": [
       "tabs",
-      "storage"
+      "storage",
+      "system.display"
     ],
     "commands": {
       "_execute_browser_action": {

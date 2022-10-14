@@ -2,14 +2,38 @@
 document.addEventListener('DOMContentLoaded', () => {
 
   async function getTabs() {
+    // query Chrome for tabs in current window
     let queryOptions = { currentWindow: true };
     let tabs = await chrome.tabs.query(queryOptions);
-    return tabs
+
+    let unactiveTabs = [];
+    let activeTabs = [];
+
+    // sort tabs by activeness
+    tabs.forEach(tab => {
+      if (tab.active) {
+        activeTabs.push(tab.url);
+      } else {
+        unactiveTabs.push(tab.url);
+      }
+    });
+
+    chrome.windows.create({
+      url: activeTabs,
+      type: "normal"
+    });
+
+    // console.log(tabs);
+    return [activeTabs, unactiveTabs]
   }
 
-  let tabs = getTab();
+  let tabs = getTabs();
 
-
+  console.log(tabs);
+  let activeTabs = tabs[0];
+  let unactiveTabs = tabs[1];
+  
+  console.log(activeTabs);
 
 
 
