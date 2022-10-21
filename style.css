@@ -11,13 +11,19 @@ td {
   padding: 2px;
 }
 
-.screen_size {
+table {
+  border-collapse: collapse;
+}
+
+/* .screen_name {
+  width: 100%;
+  height: 100%;
   fill: white;
   stroke-width:2;
   stroke:#77a6f7;
-}
+} */
 
-.screen_size:hover {
+.screen_name:hover {
   fill: #303C6C;
   stroke-width:2;
   stroke:#77a6f7;
