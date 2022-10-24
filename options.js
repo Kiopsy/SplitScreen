@@ -16,39 +16,53 @@ let size_labels = ["3:7", "4:6", "5:5", "6:4", "7:3"]
 for (let i = 0; i < sizes.length; i++) {
     var tr = document.createElement('tr');  
 
-    var label = document.createElement('td');
-    label.setAttribute("class", "number_label");
+    var td = document.createElement('td');
+
+    var label = document.createElement('p');
+    label.setAttribute("class", "number-label");
     label.appendChild(document.createTextNode(size_labels[i]));
-    tr.appendChild(label);
+    td.appendChild(label);
+    tr.appendChild(td);
+
+    var td = document.createElement('td');
 
     for (let k = 0; k < 2; k++) {
-        var sizeSplit = (10 / sizes[i][k]);
-        var width = optionWidth / sizeSplit;
+        let sizeSplit = (10 / sizes[i][k]);
+        let width = optionWidth / sizeSplit;
 
-        var td = document.createElement('td');
 
-        // var svg = document.createElement("div");
-        td.setAttribute("style", `width: ${width}px; height: ${optionHeight}px; fill: white; stroke-width:2; stroke:#77a6f7; z-index: 99;`);
-        // svg.className = "screen_name";
-        // var rect = document.createElement("rect");
-        // rect.setAttribute("class","screen_name");
-        // rect.setAttribute("width", width);
-        // rect.setAttribute("height", optionHeight);
+        // variable for the namespace 
+        const svgns = "http://www.w3.org/2000/svg";
 
-        // function func() {
-        //     if (k == 0) {
-        //         split(sizeSplit, "L");
-        //     } else {
-        //         split(sizeSplit, "R");
-        //     }
-        // }
-        // rect.addEventListener("click", func);
+        // make a simple rectangle
+        
+        var svg = document.createElementNS(svgns, "svg");
+        svg.setAttribute("width", width);
+        svg.setAttribute("height", optionHeight);
+        
+    
+        let newRect = document.createElementNS(svgns, "rect");
 
-        // svg.appendChild(rect);
-        // td.appendChild(svg);
+        newRect.setAttribute("width", width);
+        newRect.setAttribute("height", optionHeight);        
+        newRect.setAttribute("margin-right", "10px");
+        newRect.setAttribute("class", "screen-name");
 
-        tr.appendChild(td);
+        // append the new rectangle to the svg
+        svg.appendChild(newRect);
+
+        function func() {
+            if (k == 0) {
+                split(sizes[i][k], "L");
+            } else {
+                split(sizes[i][k], "R");
+            }
+        }
+
+        newRect.addEventListener("click", func);
+        td.appendChild(svg);
     }
 
+    tr.appendChild(td);
     table.appendChild(tr)
 }

@@ -1,6 +1,8 @@
 // Window Manager
 const w = window.screen.availWidth;
 const h = window.screen.availHeight;
+const chrome_width_limit = 500;
+const gap = 20;
 
 /**
  * Create a new window with the given tabs, size, and left position.
@@ -12,9 +14,9 @@ function createWindow(tabs, size, left) {
     chrome.windows.create({
     url: tabs,
     type: "normal",
-    width: w  / size,
+    width: Math.round(size),
     height: h,
-    left: left,
+    left: Math.round(left),
     top: 0
     });
 }
@@ -27,9 +29,9 @@ function createWindow(tabs, size, left) {
 function updateWindow(size, left) {
     chrome.windows.getCurrent(function (window) {
     var updateInfo = {
-        width: w  / size,
+        width: Math.round(size),
         height: h,
-        left: left,
+        left: Math.round(left),
         top: 0
     };
     (updateInfo.state = "normal"), chrome.windows.update(window.id, updateInfo);
@@ -37,13 +39,29 @@ function updateWindow(size, left) {
 }
 
 /* Splitting the screen into two parts. */
-export default async function split(size, screenSide) {
+export default async function split(ratio, screenSide) {
     // query Chrome for tabs in current window
     let queryOptions = { currentWindow: true };
     let tabs = await chrome.tabs.query(queryOptions);
 
     let inactiveTabs = [];
     let activeTabs = [];
+
+    let screenSideRatio, oppositeSideRatio;
+    
+    if (toPixels(ratio) < chrome_width_limit ) {
+      screenSideRatio = fromPixels(chrome_width_limit + gap);
+      oppositeSideRatio = fromPixels(w - 500 - gap);
+    } else if (toPixels(10 - ratio) < chrome_width_limit) { 
+      screenSideRatio = fromPixels(w - 500 - gap);
+      oppositeSideRatio = fromPixels(chrome_width_limit + gap);
+    } else {
+      screenSideRatio = ratio;
+      oppositeSideRatio = 10 - ratio;
+    }
+
+    let l_size = toPixels(screenSideRatio);
+    let r_size = toPixels(oppositeSideRatio);
 
     // sort tabs by activeness
     tabs.forEach(tab => {
@@ -55,13 +73,20 @@ export default async function split(size, screenSide) {
     });
 
     if (screenSide == "L") {
-        createWindow(activeTabs, size, 0);
-        updateWindow(size, w / size);
+        createWindow(activeTabs, l_size, 0);
+        updateWindow(r_size, l_size);
     } else {
-        createWindow(activeTabs, size, w / size);
-        updateWindow(size, 0);
+        createWindow(activeTabs, l_size, r_size);
+        updateWindow(r_size, 0);
     }
+}
 
-    // console.log(tabs);
-    // return [activeTabs, inactiveTabs]
+// get a ratio from the number of pixels on the screen
+function fromPixels(pixels) {
+  return 10 / (w / pixels);
+}
+
+// pass in a ratio, get back the number of pixesls it takes up on-screen
+function toPixels(ratio) {
+  return w / (10 / ratio);
 }

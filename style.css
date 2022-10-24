@@ -7,30 +7,27 @@ body {
   padding-right: 5px;
 }
 
-td {
-  padding: 2px;
-}
-
-table {
-  border-collapse: collapse;
-}
-
-/* .screen_name {
+tr {
   width: 100%;
-  height: 100%;
+}
+
+.screen-name {
+  /* padding: 2; */
+  /* width: 100%;
+  height: 100%; */
+  overflow:auto;
   fill: white;
   stroke-width:2;
   stroke:#77a6f7;
-} */
+}
 
-.screen_name:hover {
+.screen-name:hover {
   fill: #303C6C;
   stroke-width:2;
   stroke:#77a6f7;
 }
 
-.number_label {
-  display: flex;
+.number-label {
   justify-content: center;
   align-items: center;
   border-right: 1px solid #DDD;
