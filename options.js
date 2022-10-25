@@ -39,7 +39,7 @@ for (let i = 0; i < sizes.length; i++) {
         var svg = document.createElementNS(svgns, "svg");
         svg.setAttribute("width", width);
         svg.setAttribute("height", optionHeight);
-        
+        svg.setAttribute("class", "rectangle");
     
         let newRect = document.createElementNS(svgns, "rect");
 

@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
       chrome.windows.create({
         url: tabs,
         type: "normal",
-        width: w  / 2,
+        width: w / 2,
         height: h,
         left: 0,
         top: 0
