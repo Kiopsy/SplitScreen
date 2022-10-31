@@ -1,0 +1,37 @@
+body {
+  overflow-x:hidden;
+  width : 180px;
+  height : 370px;
+  padding-top : 10px;
+  padding-left : 5px;
+  padding-right: 5px;
+}
+
+tr {
+  width: 100%;
+}
+
+.screen-name {
+  /* padding: 2; */
+  /* width: 100%;
+  height: 100%; */
+  overflow:auto;
+  fill: white;
+  stroke-width:2;
+  stroke:#77a6f7;
+}
+
+.screen-name:hover {
+  fill: #303C6C;
+  stroke-width:2;
+  stroke:#77a6f7;
+}
+
+.number-label {
+  justify-content: center;
+  align-items: center;
+  border-right: 1px solid #DDD;
+  margin-right: 5px;
+  width: 2em;
+  height: 43px;
+}
